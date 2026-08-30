@@ -1,5 +1,8 @@
 # Task for Jules: Build Network Analysis Stack
 
+**Jules Suggestions Status:** ⏸️ DISABLED / PAUSED  
+*Hinweis: Autonome Suggestions und Hintergrund-Aufgaben für dieses Repository sind vorübergehend deaktiviert.*
+
 ## Background
 Der User hat dieses dedizierte Repository reaktiviert, um alle Netzwerk-Analyse-Tools und -Daten zentral hier zu bündeln, anstatt sie lose im generischen `homelab_infra` Repo zu verwalten. 
 
