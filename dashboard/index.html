@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Analysis Stack - Control Hub</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.85);
+            --border: #30363d;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --green: #3fb950;
+            --orange: #d29922;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background: var(--bg-color); color: var(--text-main); min-height: 100vh; padding: 2.5rem 1.5rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 2.5rem; }
+        h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        p.subtitle { color: var(--text-muted); font-size: 1.05rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(10px); transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+        .badge { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 20px; background: rgba(88, 166, 255, 0.15); color: var(--accent); }
+        .badge.online { background: rgba(63, 185, 80, 0.15); color: var(--green); }
+        h2 { font-size: 1.3rem; margin-bottom: 0.4rem; }
+        p.desc { color: var(--text-muted); font-size: 0.92rem; line-height: 1.45; margin-bottom: 1.2rem; }
+        .btn { display: inline-block; text-align: center; background: #238636; color: #fff; text-decoration: none; padding: 0.65rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.95rem; transition: background 0.2s; }
+        .btn:hover { background: #2ea043; }
+        .port-tag { font-family: monospace; font-size: 0.82rem; color: var(--text-muted); }
+        footer { text-align: center; margin-top: 3.5rem; color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 Network Analysis Stack</h1>
+            <p class="subtitle">Unified Homelab Traffic, Latency, SNMP & Intruder Detection Gateway</p>
+        </header>
+
+        <div class="grid">
+            <!-- 1. NetAlertX -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="badge online">Active Guard</span>
+                        <span class="port-tag">:20211</span>
+                    </div>
+                    <h2>NetAlertX</h2>
+                    <p class="desc">WiFi / LAN intruder detection, rogue MAC alert scanner, and real-time network presence tracking.</p>
+                </div>
+                <a href="http://localhost:20211" class="btn" target="_blank">Open NetAlertX</a>
+            </div>
+
+            <!-- 2. Smokeping -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="badge online">Latency RTT</span>
+                        <span class="port-tag">:8085</span>
+                    </div>
+                    <h2>Smokeping</h2>
+                    <p class="desc">Interactive latency, packet loss, and jitter tracking across WAN gateways and internal mesh hops.</p>
+                </div>
+                <a href="http://localhost:8085" class="btn" target="_blank">Open Smokeping</a>
+            </div>
+
+            <!-- 3. LibreNMS -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="badge online">SNMP Suite</span>
+                        <span class="port-tag">:8086</span>
+                    </div>
+                    <h2>LibreNMS</h2>
+                    <p class="desc">Auto-discovering SNMP network monitoring system for switches, routers, interfaces, and servers.</p>
+                </div>
+                <a href="http://localhost:8086" class="btn" target="_blank">Open LibreNMS</a>
+            </div>
+
+            <!-- 4. Home Assistant -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="badge">Mesh Core</span>
+                        <span class="port-tag">:8123</span>
+                    </div>
+                    <h2>Home Assistant Core</h2>
+                    <p class="desc">Smart Home integration, Zigbee/Z-Wave mesh topology, and network entity automation hub.</p>
+                </div>
+                <a href="http://homeassistant.local:8123" class="btn" target="_blank">Open Home Assistant</a>
+            </div>
+
+            <!-- 5. Proxmox VE -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="badge">Hypervisor</span>
+                        <span class="port-tag">:8006</span>
+                    </div>
+                    <h2>Proxmox Virtual Environment</h2>
+                    <p class="desc">Virtual machine and Linux container cluster virtualization platform.</p>
+                </div>
+                <a href="https://localhost:8006" class="btn" target="_blank">Open Proxmox VE</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>Managed autonomously via GitOps & Jules | Network Analysis Stack v2.0</p>
+        </footer>
+    </div>
+</body>
+</html>

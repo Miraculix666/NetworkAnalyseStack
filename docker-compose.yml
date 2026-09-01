@@ -1,0 +1,82 @@
+version: "3.8"
+
+services:
+  # 1. Central Portal & Landingpage (Port 8080)
+  portal:
+    image: nginx:alpine
+    container_name: net-portal
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./dashboard:/usr/share/nginx/html:ro
+
+  # 2. NetAlertX - WiFi / LAN Intruder & Presence Detector (Port 20211)
+  netalertx:
+    image: jokobsk/netalertx:latest
+    container_name: netalertx
+    restart: unless-stopped
+    network_mode: "host"
+    environment:
+      - TZ=Europe/Berlin
+      - PORT=20211
+    volumes:
+      - ./data/netalertx/config:/app/config
+      - ./data/netalertx/db:/app/db
+      - ./data/netalertx/logs:/app/front/log
+
+  # 3. Smokeping - Network Latency, RTT & Jitter Tracking (Port 8085)
+  smokeping:
+    image: lscr.io/linuxserver/smokeping:latest
+    container_name: smokeping
+    restart: unless-stopped
+    ports:
+      - "8085:80"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+    volumes:
+      - ./data/smokeping/config:/config
+      - ./data/smokeping/data:/data
+
+  # 4. LibreNMS Database Backend
+  librenms-db:
+    image: mariadb:10.11
+    container_name: librenms-db
+    restart: unless-stopped
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=yes
+      - MARIADB_DATABASE=librenms
+      - MARIADB_USER=librenms
+      - MARIADB_PASSWORD=librenms_secret
+    volumes:
+      - ./data/librenms/db:/var/lib/mysql
+
+  # 5. LibreNMS Redis Caching
+  librenms-redis:
+    image: redis:7-alpine
+    container_name: librenms-redis
+    restart: unless-stopped
+
+  # 6. LibreNMS - Comprehensive SNMP Network Monitoring (Port 8000)
+  librenms:
+    image: librenms/librenms:latest
+    container_name: librenms
+    restart: unless-stopped
+    ports:
+      - "8086:8000"
+    depends_on:
+      - librenms-db
+      - librenms-redis
+    environment:
+      - TZ=Europe/Berlin
+      - PUID=1000
+      - PGID=1000
+      - DB_HOST=librenms-db
+      - DB_NAME=librenms
+      - DB_USER=librenms
+      - DB_PASSWORD=librenms_secret
+      - REDIS_HOST=librenms-redis
+    volumes:
+      - ./data/librenms/data:/data
