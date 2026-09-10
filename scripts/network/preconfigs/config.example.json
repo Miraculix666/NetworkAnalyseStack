@@ -1,0 +1,5 @@
+﻿{
+    "environment":  "production",
+    "category":  "Network",
+    "dryRun":  false
+}

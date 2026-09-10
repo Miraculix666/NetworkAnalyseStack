@@ -1,3 +1,8 @@
+﻿# FILE: Deploy-NetworkStack.ps1
+# PURPOSE: Categorized under scripts/User
+# LAST MODIFIED: 2026-09-08
+# MODIFIED BY: Sort-RepoScripts.ps1
+
 # Deploy-NetworkStack.ps1 - Deployment script for Windows / Docker Desktop
 [CmdletBinding()]
 param()
@@ -16,3 +21,4 @@ New-Item -ItemType Directory -Path "$root\data\librenms\data" -Force | Out-Null
 
 docker compose up -d
 Write-Host "✅ Network Analysis Stack running! Access portal at http://localhost:8080" -ForegroundColor Green
+
